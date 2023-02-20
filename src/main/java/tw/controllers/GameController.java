@@ -28,7 +28,7 @@ public class GameController {
 
     public void play(InputCommand command) throws IOException, OutOfGuessCountException {
 
-        if (game.checkCoutinue()) {
+        if (game.checkContinue()) {
             GuessResult guessResult = game.guess(command.input());
             gameView.showGuessResult(guessResult);
             gameView.showGuessHistory(game.guessHistory());
