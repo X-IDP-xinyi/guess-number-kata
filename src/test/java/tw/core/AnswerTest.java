@@ -21,13 +21,11 @@ class AnswerTest {
 
     @Test
     void should_return_answer_when_createAnswer_input_is_inputStr() {
-        actualAnswer = Answer.createAnswer("1 2 3 4");
         assertThat(actualAnswer.toString(), is("1 2 3 4"));
     }
 
     @Test
     void should_validate_answer_when_createAnswer_input_is_correct() {
-        actualAnswer = Answer.createAnswer("1 2 3 4");
         try {
             actualAnswer.validate();
         } catch (AnswerFormatIncorrectException e) {
@@ -45,6 +43,19 @@ class AnswerTest {
             System.out.println("Throw AnswerFormatIncorrectException");
         }
     }
+    @Test
+    void should_return_string_method_of_input_answer() {
+        assertThat(actualAnswer.toString(), is("1 2 3 4"));
+    }
 
+    @Test
+    void should_return_index_when_given_input_answer() {
+        assertThat(actualAnswer.getIndexOfNum("4"),is(3));
+        assertThat(actualAnswer.getIndexOfNum("1"),is(0));
+    }
+    @Test
+    void should_return_4A0B_result_when_given_correct_answer() {
+        assertThat(actualAnswer.check(actualAnswer).getValue(),is("4A0B"));
+    }
 
 }
