@@ -87,12 +87,21 @@ class GameTest {
 
     @Test
     void should_return_4A0B_result_when_given_correct_answer() {
-        GuessResult guessResult = null;
+        GuessResult guessResult;
         try {
             guessResult = game.guess(Answer.createAnswer("1 2 3 4"));
         } catch (OutOfGuessCountException e) {
             throw new RuntimeException(e);
         }
         assertThat(guessResult.getResult(),is("4A0B"));
+    }
+    @Test
+    void should_return_guessHistory_when_input_is_guess() throws Exception {
+        GuessResult guessResult = game.guess(Answer.createAnswer("7 8 9 0"));
+        GuessResult guessResult1 = game.guess(Answer.createAnswer("3 1 5 8"));
+        //when
+        //then
+        assertThat( game.guessHistory().get( 0 ),is( guessResult ) );
+        assertThat( game.guessHistory().get( 1 ),is( guessResult1 ) );
     }
 }
