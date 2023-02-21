@@ -84,4 +84,15 @@ class GameTest {
         GuessResult guessResult = game.guess(actualAnswer);
         assertThat(game.guessHistory().get(0), is(guessResult));
     }
+
+    @Test
+    void should_return_4A0B_result_when_given_correct_answer() {
+        GuessResult guessResult = null;
+        try {
+            guessResult = game.guess(Answer.createAnswer("1 2 3 4"));
+        } catch (OutOfGuessCountException e) {
+            throw new RuntimeException(e);
+        }
+        assertThat(guessResult.getResult(),is("4A0B"));
+    }
 }
