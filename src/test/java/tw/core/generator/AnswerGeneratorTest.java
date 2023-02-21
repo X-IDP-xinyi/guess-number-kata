@@ -15,9 +15,9 @@ import static org.mockito.Mockito.when;
 /**
  * Created by jxzhong on 2017/5/17.
  */
-public class AnswerGeneratorTest {
+class AnswerGeneratorTest {
     @Test()
-    public void should_throw_OutOfRangeAnswerException_which_is_not_between_0_and_9() {
+    void should_throw_OutOfRangeAnswerException_which_is_not_between_0_and_9() {
         RandomIntGenerator randomIntGenerator = mock(RandomIntGenerator.class);
         when(randomIntGenerator.generateNums(anyInt(), anyInt())).thenReturn("1 2 3 10");
         AnswerGenerator answerGenerator = new AnswerGenerator(randomIntGenerator);
@@ -27,7 +27,7 @@ public class AnswerGeneratorTest {
     }
 
     @Test
-    public void should_get_radam_number() throws Exception {
+    void should_get_random_number() throws Exception {
         RandomIntGenerator randomIntGenerator = mock(RandomIntGenerator.class);
         when(randomIntGenerator.generateNums(anyInt(), anyInt())).thenReturn("1 2 3 4");
         AnswerGenerator answerGenerator = new AnswerGenerator(randomIntGenerator);
