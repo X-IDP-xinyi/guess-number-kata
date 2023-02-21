@@ -10,6 +10,7 @@ import tw.core.model.GuessResult;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -40,7 +41,7 @@ class GameTest {
     }
 
     @Test
-     void should_get_the_fail_status_when_input_times_is_6() throws OutOfGuessCountException {
+    void should_get_the_fail_status_when_input_times_is_6() throws OutOfGuessCountException {
         Answer actualAnswer = Answer.createAnswer("1 3 5 7");
         Answer actualAnswer2 = Answer.createAnswer("2 4 6 8");
         game.guess(actualAnswer);
@@ -71,6 +72,7 @@ class GameTest {
         game.guess(actualAnswer);
         assertThat(game.checkStatus(), is("continue"));
     }
+
     @Test
     void should_return_true_when_checkContinue_equals_continue() throws OutOfGuessCountException {
         Answer actualAnswer = Answer.createAnswer("1 3 5 7");
@@ -93,7 +95,7 @@ class GameTest {
         } catch (OutOfGuessCountException e) {
             throw new RuntimeException(e);
         }
-        assertThat(guessResult.getResult(),is("4A0B"));
+        assertThat(guessResult.getResult(), is("4A0B"));
     }
     @Test
     void should_return_guessHistory_when_input_is_guess() throws Exception {
@@ -101,7 +103,25 @@ class GameTest {
         GuessResult guessResult1 = game.guess(Answer.createAnswer("3 1 5 8"));
         //when
         //then
-        assertThat( game.guessHistory().get( 0 ),is( guessResult ) );
-        assertThat( game.guessHistory().get( 1 ),is( guessResult1 ) );
+        assertThat(game.guessHistory().get(0), is(guessResult));
+        assertThat(game.guessHistory().get(1), is(guessResult1));
+    }
+
+    @Test
+    void should_throw_OutOfGuessCountException_when_input_times_over_6() throws Exception {
+        GuessResult guess0 = game.guess(Answer.createAnswer("1 1 3 4"));
+        GuessResult guess1 = game.guess(Answer.createAnswer("1 1 3 4"));
+        GuessResult guess2 = game.guess(Answer.createAnswer("1 1 3 4"));
+        GuessResult guess3 = game.guess(Answer.createAnswer("1 1 3 4"));
+        GuessResult guess4 = game.guess(Answer.createAnswer("1 1 3 4"));
+        GuessResult guess5 = game.guess(Answer.createAnswer("1 1 3 4"));
+        //when
+        //then
+        try {
+            GuessResult guess6 = game.guess(Answer.createAnswer("1 2 4 5"));
+            fail("it should fail");
+        } catch (OutOfGuessCountException e) {
+            System.out.println("throw OutOfGuessCountException");
+        }
     }
 }
