@@ -28,7 +28,7 @@ class AnswerTest {
     void should_validate_answer_when_createAnswer_input_is_correct() {
         Answer answer = Answer.createAnswer("1 2 6 8");
         try {
-            actualAnswer.validate();
+            answer.validate();
         } catch (AnswerFormatIncorrectException e) {
             System.out.println("Do not Throw AnswerFormatIncorrectException");
         }
@@ -36,9 +36,9 @@ class AnswerTest {
 
     @Test
     void should_invalidate_answer_when_createAnswer_input_is_false() {
-        actualAnswer = Answer.createAnswer("1 2 12 4");
+        Answer answer  = Answer.createAnswer("1 2 12 4");
         try {
-            actualAnswer.validate();
+            answer.validate();
         } catch (AnswerFormatIncorrectException e) {
             System.out.println("Throw AnswerFormatIncorrectException");
         }
