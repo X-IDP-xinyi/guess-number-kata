@@ -98,6 +98,7 @@ class GameTest {
         }
         assertThat(guessResult.getResult(), is("4A0B"));
     }
+
     @Test
     void should_return_guessHistory_when_input_is_guess() throws Exception {
         GuessResult guessResult = game.guess(Answer.createAnswer("7 8 9 0"));
@@ -110,16 +111,17 @@ class GameTest {
 
     @Test
     void should_throw_OutOfGuessCountException_when_input_times_over_6() throws Exception {
-        GuessResult guess0 = game.guess(Answer.createAnswer("1 1 3 4"));
-        GuessResult guess1 = game.guess(Answer.createAnswer("1 1 3 4"));
-        GuessResult guess2 = game.guess(Answer.createAnswer("1 1 3 4"));
-        GuessResult guess3 = game.guess(Answer.createAnswer("1 1 3 4"));
-        GuessResult guess4 = game.guess(Answer.createAnswer("1 1 3 4"));
-        GuessResult guess5 = game.guess(Answer.createAnswer("1 1 3 4"));
+        Answer answer = Answer.createAnswer("1 1 3 4");
+        game.guess(answer);
+        game.guess(answer);
+        game.guess(answer);
+        game.guess(answer);
+        game.guess(answer);
+        game.guess(answer);
         //when
         //then
         try {
-            GuessResult guess6 = game.guess(Answer.createAnswer("1 2 4 5"));
+            game.guess(answer);
             fail("Guess count cant over 6!");
         } catch (OutOfGuessCountException e) {
             checkNotNull(e);
