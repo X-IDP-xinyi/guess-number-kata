@@ -8,6 +8,7 @@ import tw.core.exception.OutOfGuessCountException;
 import tw.core.generator.AnswerGenerator;
 import tw.core.model.GuessResult;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -119,9 +120,9 @@ class GameTest {
         //then
         try {
             GuessResult guess6 = game.guess(Answer.createAnswer("1 2 4 5"));
-            fail("it should fail");
+            fail("Guess count cant over 6!");
         } catch (OutOfGuessCountException e) {
-            System.out.println("throw OutOfGuessCountException");
+            checkNotNull(e);
         }
     }
 }
